@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Modalidad</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">tiempo de frente</h5>
+          <p class="card-text"><input type="number" id="green"></p>
+
+          <h5 class="card-title">Tiempo perfil</h5>
+          <p class="card-text"><input type="number" id="red"></p>
+
+          <h5 class="card-title">nº Exposicion</h5>
+          <p class="card-text"><input type="number" id="expo"></p>
+
+          <h5 class="card-title">Tiempo para cargar</h5>
+          <p class="card-text"><input type="number" id="cargar" value="60"></p>
+
+
+        </div>
+        <div class="card-footer">
+                <button id="button" class="btn btn-success form-control">Cargar!</button>
+                <br>
+
+                <button  id="button2" class="btn btn-warning form-control">cancelar!</button>
+                <button  id="button3" class="btn btn-danger form-control">APAGAR!</button>
+
+            </div> 
+        <div id="div1">
+
+        </div>
+    </div>
+  </div>
+
+
+</body>
+<script>
+
+
+var cargar = new Audio("/cargar.mp3");
+var atencion = new Audio("/atencion.mp3");
+
+var descargar = new Audio("/altodescargar.mp3");
+
+$("#button").click(function(){
+    cargar.play();
+    $.ajax({url: `http://localhost:3000/cargar/${$("#cargar").val()}`, success: function(result){
+        atencion.play();
+    setTimeout(function(){
+
+      $.ajax({url: `http://localhost:3000/tiro/${$("#green").val()}/${$("#red").val()}/${$("#expo").val()}`, success: function(result){
+          descargar.play();
+      }})    
+     },5000);
+
+}});
+    //return false;
+    
+});
+
+$("#button2").click(function(){
+
+    $.ajax({url: `/reset`, success: function(result){
+        alert(result);
+    }});
+});
+$("#button3").click(function(){
+
+$.ajax({url: `/apagar`, success: function(result){
+    alert(result);
+}});
+});
+</script>
+</html>
