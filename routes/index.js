@@ -19,6 +19,16 @@ router.get('/reset', function(req, res, next){
     res.send('doreset')
   });
 })
+router.get('/update', function(req, res, next){
+  exec('', (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(stdout);
+    res.send('doreset')
+  });
+})
 
 router.get('/apagar', function(req, res, next){
   exec('sudo shutdown now', (err, stdout, stderr) => {
