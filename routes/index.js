@@ -108,12 +108,20 @@ function doA() {
   relay2.on();
   relay.off();
   let count = 0;
+if (counttotal === 0){
+countaux = 7;
+} else {
+countaux = parseInt(req.params.red)
+}
   const a = setInterval(() => {
     //do A
-    
+   
     count += 1;
     console.log('Tiempo Rojo ', count);
-    if (count === parseInt(req.params.red)) {
+
+
+
+if (count === countaux) {
       clearInterval(a);
       doB();
     }
