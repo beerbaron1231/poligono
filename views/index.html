@@ -54,11 +54,11 @@ var descargar = new Audio("/altodescargar.mp3");
 
 $("#button").click(function(){
     cargar.play();
-    $.ajax({url: `http://localhost:3000/cargar/${$("#cargar").val()}`, success: function(result){
+    $.ajax({url: `/cargar/${$("#cargar").val()}`, success: function(result){
         atencion.play();
     setTimeout(function(){
 
-      $.ajax({url: `http://localhost:3000/tiro/${$("#green").val()}/${$("#red").val()}/${$("#expo").val()}`, success: function(result){
+      $.ajax({url: `/tiro/${$("#green").val()}/${$("#red").val()}/${$("#expo").val()}`, success: function(result){
           descargar.play();
       }})    
      },5000);

@@ -5,7 +5,7 @@ var board = new five.Board();
 const { exec } = require('child_process');
 
 
-router.get('/', function(req, res, next){
+router.get('/',  function(req, res, next){
   res.sendfile('views/index.html');
 })
 
